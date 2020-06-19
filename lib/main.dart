@@ -34,31 +34,89 @@ class TodosScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Todos'),
       ),
-      body: ListView.builder(
-        itemCount: todos.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(todos[index].title),
-            // When a user taps the ListTile, navigate to the DetailScreen.
-            // Notice that you're not only creating a DetailScreen, you're
-            // also passing the current todo through to it.
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TabListPage(),
-                  // Pass the arguments as part of the RouteSettings. The
-                  // DetailScreen reads the arguments from these settings.
-                  settings: RouteSettings(
-                    arguments: todos[index],
-                  ),
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
+      body: Column(
+        children: <Widget>[
+          new TextField(
+            decoration: new InputDecoration(labelText: "Enter start number"),
+            keyboardType: TextInputType.number,
+          ),
+          new TextField(
+            decoration: new InputDecoration(labelText: "Enter end number"),
+            keyboardType: TextInputType.number,
+          ),
+          RaisedButton(
+            child: Text("検索開始"),
+            color: Colors.white,
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            ),
+            onPressed: () {},
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: todos.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  height: 150,
+                  color: index % 2 == 0 ? Colors.white: Colors.black12,
+                  //child: Center(child: Text('Entry ${todos[index].title}')),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Column(children: <Widget>[
+                        Text("Polling"),
+                        Text("Manufacture ID"),
+                        Text("Device Type"),
+                        Text("Device ID"),
+                        Text("HART Version"),
+                        Text("Tag"),
+                        Text("Long Tag"),
+                      ],),
+                      Column(children: <Widget>[
+                        Text('Entry ${todos[index].title}'),
+                        Text('Entry ${todos[index].title}'),
+                        Text('Entry ${todos[index].title}'),
+                        Text('Entry ${todos[index].title}'),
+                        Text('Entry ${todos[index].title}'),
+                        Text('Entry ${todos[index].title}'),
+                        Text('Entry ${todos[index].title}'),
+                      ],)
+                    ],
+                  )
+                );
+
+                /*
+                  Card(
+                    child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Text("ABC"),
+                  ListTile(
+                  leading: Text(index.toString(), textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 16.0),),
+                  title: Text(todos[index].title, textAlign: TextAlign.right, style: TextStyle(fontSize: 16.0),),
+                  // When a user taps the ListTile, navigate to the DetailScreen.
+                  // Notice that you're not only creating a DetailScreen, you're
+                  // also passing the current todo through to it.
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TabListPage(),
+                        // Pass the arguments as part of the RouteSettings. The
+                        // DetailScreen reads the arguments from these settings.
+                        settings: RouteSettings(
+                          arguments: todos[index],
+                        ),
+                      ),
+                    );
+                  },
+                )]));
+              */
+
+              },
+            ),
+          )]));
   }
 }
 
